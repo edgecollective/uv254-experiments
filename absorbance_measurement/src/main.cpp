@@ -9,10 +9,10 @@
 #define BTN_MEAS_PIN  7   // Button A -> COMPUTE
 
 // LED modulation output (MICRO_PULSE on the LED CTRL SELECT jumper).
-// Matches the 555 frequency: T = 0.8*(R16+R5)*C4 = 0.8 * 11k * 0.1u = 880us -> ~1.14 kHz
+// 200 Hz sits at the peak of the detector chain's bandpass (see freq_test/exp2.png).
 #define LED_PIN        12
-const uint32_t LED_FREQ_HZ   = 1140;
-const uint32_t LED_WARMUP_MS = 1500;
+const uint32_t LED_FREQ_HZ   = 200;
+const uint32_t LED_WARMUP_MS = 3000;   // 1.5 s wasn't enough -- first sample was ~10 % low (lod_test).
 
 // Detector input: envelope-detected DC from the detector daughterboard
 // (raw detect -> rectifier -> RC low-pass at ~88 Hz -> A5).
@@ -186,6 +186,14 @@ static void on_avg_complete() {
 static void tick_warmup() {
   if (state != WARMING_UP) return;
   if ((int32_t)(millis() - warmup_done_ms) < 0) return;
+
+  // Throwaway sample so the first averaged read is at steady state, not on the
+  // tail of the LED warm-up transient.
+  float discard = (float)analogRead(DETECT_PIN);
+  Serial.print("discard ");
+  Serial.println(discard, 4);
+  Serial.flush();
+
   start_averaging();
   render();
 }
