@@ -1,0 +1,444 @@
+24.900,warmup,warmup,0,5,1031.8600,0.75594
+29.900,warmup,warmup,0,6,1034.2400,0.75769
+34.900,warmup,warmup,0,7,1032.4800,0.75640
+39.900,warmup,warmup,0,8,1032.6200,0.75650
+44.900,warmup,warmup,0,9,1033.8000,0.75736
+49.900,warmup,warmup,0,10,1033.2600,0.75697
+54.900,warmup,warmup,0,11,1032.5601,0.75645
+59.900,warmup,warmup,0,12,1033.8600,0.75741
+64.900,warmup,warmup,0,13,1032.6801,0.75654
+69.900,warmup,warmup,0,14,1033.5601,0.75719
+74.900,warmup,warmup,0,15,1032.8800,0.75669
+79.900,warmup,warmup,0,16,1033.7200,0.75730
+84.900,warmup,warmup,0,17,1033.0000,0.75678
+89.900,warmup,warmup,0,18,1032.9800,0.75676
+94.900,warmup,warmup,0,19,1032.6000,0.75648
+99.900,warmup,warmup,0,20,1032.1400,0.75615
+104.900,warmup,warmup,0,21,1031.3600,0.75558
+109.900,warmup,warmup,0,22,1031.8199,0.75591
+114.900,warmup,warmup,0,23,1031.9800,0.75603
+119.900,warmup,warmup,0,24,1031.8600,0.75594
+124.900,warmup,warmup,0,25,1032.2600,0.75623
+# warmup complete at t=124.900s; ready for blank cycles
+# awaiting cuvette swap for blank 1 (press B when seated) at t=124.900s
+# blank 1 begin at t=272.831s
+# blank 1 settle begin at t=272.831s
+277.731,blank,settle,1,1,1032.6200,0.75650
+282.731,blank,settle,1,2,1033.7000,0.75729
+287.731,blank,settle,1,3,1033.8800,0.75742
+292.731,blank,settle,1,4,1034.2200,0.75767
+297.731,blank,settle,1,5,1033.9600,0.75748
+# blank 1 avg begin at t=297.731s
+302.631,blank,avg,1,1,1033.7800,0.75735
+307.631,blank,avg,1,2,1034.6600,0.75799
+312.631,blank,avg,1,3,1034.6801,0.75801
+317.631,blank,avg,1,4,1033.8800,0.75742
+322.631,blank,avg,1,5,1033.8800,0.75742
+327.631,blank,avg,1,6,1034.1400,0.75761
+332.631,blank,avg,1,7,1032.5000,0.75641
+337.631,blank,avg,1,8,1031.3000,0.75553
+342.631,blank,avg,1,9,1032.0800,0.75610
+347.631,blank,avg,1,10,1031.7800,0.75588
+# blank 1 final = 1033.2681 counts, 0.75697 V
+# LOD stats: n=1, mean=1033.2681, std=0.0000, CoV=0.0000%, LOD_A3sigma=0.000000
+# awaiting cuvette swap for blank 2 (press B when seated) at t=347.632s
+# blank 2 begin at t=400.566s
+# blank 2 settle begin at t=400.566s
+405.466,blank,settle,2,1,1030.4000,0.75487
+410.466,blank,settle,2,2,1031.2000,0.75546
+415.466,blank,settle,2,3,1028.8000,0.75370
+420.466,blank,settle,2,4,1030.4399,0.75490
+425.466,blank,settle,2,5,1030.2600,0.75477
+# blank 2 avg begin at t=425.466s
+430.366,blank,avg,2,1,1030.1801,0.75471
+435.366,blank,avg,2,2,1030.1400,0.75468
+440.366,blank,avg,2,3,1030.0601,0.75462
+445.366,blank,avg,2,4,1029.8600,0.75448
+450.366,blank,avg,2,5,1029.8199,0.75445
+455.366,blank,avg,2,6,1030.5601,0.75499
+460.366,blank,avg,2,7,1029.6200,0.75430
+465.366,blank,avg,2,8,1031.0400,0.75534
+470.366,blank,avg,2,9,1030.0400,0.75461
+475.366,blank,avg,2,10,1030.6200,0.75503
+# blank 2 final = 1030.1940 counts, 0.75472 V
+# LOD stats: n=2, mean=1031.7310, std=2.1737, CoV=0.2107%, LOD_A3sigma=0.002754
+# awaiting cuvette swap for blank 3 (press B when seated) at t=475.367s
+# blank 3 begin at t=486.071s
+# blank 3 settle begin at t=486.071s
+490.971,blank,settle,3,1,1028.5800,0.75354
+495.971,blank,settle,3,2,1028.6600,0.75360
+500.971,blank,settle,3,3,1029.9399,0.75453
+505.971,blank,settle,3,4,1029.4200,0.75415
+510.971,blank,settle,3,5,1029.8400,0.75446
+# blank 3 avg begin at t=510.971s
+515.871,blank,avg,3,1,1030.6000,0.75502
+520.871,blank,avg,3,2,1029.2600,0.75404
+525.871,blank,avg,3,3,1029.8600,0.75448
+530.871,blank,avg,3,4,1030.6200,0.75503
+535.871,blank,avg,3,5,1029.8600,0.75448
+540.871,blank,avg,3,6,1031.0601,0.75536
+545.871,blank,avg,3,7,1029.2400,0.75402
+550.871,blank,avg,3,8,1029.6400,0.75432
+555.871,blank,avg,3,9,1029.4399,0.75417
+560.871,blank,avg,3,10,1029.0200,0.75386
+# blank 3 final = 1029.8600 counts, 0.75448 V
+# LOD stats: n=3, mean=1031.1073, std=1.8787, CoV=0.1822%, LOD_A3sigma=0.002380
+# awaiting cuvette swap for blank 4 (press B when seated) at t=560.872s
+# blank 4 begin at t=599.657s
+# blank 4 settle begin at t=599.658s
+604.558,blank,settle,4,1,1027.8800,0.75303
+609.558,blank,settle,4,2,1028.2200,0.75327
+614.558,blank,settle,4,3,1027.8199,0.75298
+619.558,blank,settle,4,4,1027.4399,0.75270
+624.558,blank,settle,4,5,1027.3800,0.75266
+# blank 4 avg begin at t=624.558s
+629.458,blank,avg,4,1,1028.0000,0.75311
+634.458,blank,avg,4,2,1027.7800,0.75295
+639.458,blank,avg,4,3,1028.6200,0.75357
+644.458,blank,avg,4,4,1028.6801,0.75361
+649.458,blank,avg,4,5,1028.9399,0.75380
+654.458,blank,avg,4,6,1028.3400,0.75336
+659.458,blank,avg,4,7,1029.0601,0.75389
+664.458,blank,avg,4,8,1029.1400,0.75395
+669.458,blank,avg,4,9,1028.3600,0.75338
+674.458,blank,avg,4,10,1029.3400,0.75410
+# blank 4 final = 1028.6260 counts, 0.75357 V
+# LOD stats: n=4, mean=1030.4871, std=1.9729, CoV=0.1915%, LOD_A3sigma=0.002502
+# awaiting cuvette swap for blank 5 (press B when seated) at t=674.459s
+# blank 5 begin at t=698.053s
+# blank 5 settle begin at t=698.053s
+702.953,blank,settle,5,1,1028.5400,0.75351
+707.953,blank,settle,5,2,1029.5601,0.75426
+712.953,blank,settle,5,3,1029.0800,0.75390
+717.953,blank,settle,5,4,1029.1600,0.75396
+722.953,blank,settle,5,5,1029.4000,0.75414
+# blank 5 avg begin at t=722.953s
+727.853,blank,avg,5,1,1028.6000,0.75355
+732.853,blank,avg,5,2,1028.8400,0.75373
+737.853,blank,avg,5,3,1029.3800,0.75412
+742.853,blank,avg,5,4,1029.7400,0.75439
+747.853,blank,avg,5,5,1029.2200,0.75401
+752.853,blank,avg,5,6,1028.3199,0.75335
+757.853,blank,avg,5,7,1028.9200,0.75379
+762.853,blank,avg,5,8,1028.8000,0.75370
+767.853,blank,avg,5,9,1030.0000,0.75458
+772.853,blank,avg,5,10,1029.2000,0.75399
+# blank 5 final = 1029.1021 counts, 0.75392 V
+# LOD stats: n=5, mean=1030.2100, std=1.8174, CoV=0.1764%, LOD_A3sigma=0.002304
+# awaiting cuvette swap for blank 6 (press B when seated) at t=772.854s
+# blank 6 begin at t=813.723s
+# blank 6 settle begin at t=813.723s
+818.623,blank,settle,6,1,1028.8600,0.75374
+823.623,blank,settle,6,2,1029.1000,0.75392
+828.623,blank,settle,6,3,1028.3600,0.75338
+833.623,blank,settle,6,4,1028.4200,0.75342
+838.623,blank,settle,6,5,1028.7200,0.75364
+# blank 6 avg begin at t=838.623s
+843.523,blank,avg,6,1,1028.0400,0.75314
+848.523,blank,avg,6,2,1029.0200,0.75386
+853.523,blank,avg,6,3,1029.4600,0.75418
+858.523,blank,avg,6,4,1028.4000,0.75341
+863.523,blank,avg,6,5,1028.7200,0.75364
+868.523,blank,avg,6,6,1028.8199,0.75371
+873.523,blank,avg,6,7,1028.7800,0.75369
+878.523,blank,avg,6,8,1027.9200,0.75306
+883.523,blank,avg,6,9,1029.8000,0.75443
+888.523,blank,avg,6,10,1029.7000,0.75436
+# blank 6 final = 1028.8660 counts, 0.75375 V
+# LOD stats: n=6, mean=1029.9860, std=1.7156, CoV=0.1666%, LOD_A3sigma=0.002176
+# awaiting cuvette swap for blank 7 (press B when seated) at t=888.524s
+# blank 7 begin at t=898.585s
+# blank 7 settle begin at t=898.585s
+903.485,blank,settle,7,1,1028.5000,0.75348
+908.485,blank,settle,7,2,1028.2000,0.75326
+913.485,blank,settle,7,3,1027.5000,0.75275
+918.485,blank,settle,7,4,1028.2600,0.75330
+923.485,blank,settle,7,5,1028.1801,0.75325
+# blank 7 avg begin at t=923.485s
+928.385,blank,avg,7,1,1028.9000,0.75377
+933.385,blank,avg,7,2,1027.9800,0.75310
+938.385,blank,avg,7,3,1029.4399,0.75417
+943.385,blank,avg,7,4,1029.7600,0.75440
+948.385,blank,avg,7,5,1029.9399,0.75453
+953.385,blank,avg,7,6,1029.0400,0.75388
+958.385,blank,avg,7,7,1028.8800,0.75376
+963.385,blank,avg,7,8,1030.0400,0.75461
+968.385,blank,avg,7,9,1029.6400,0.75432
+973.385,blank,avg,7,10,1030.3600,0.75484
+# blank 7 final = 1029.3979 counts, 0.75414 V
+# LOD stats: n=7, mean=1029.9020, std=1.5818, CoV=0.1536%, LOD_A3sigma=0.002006
+# awaiting cuvette swap for blank 8 (press B when seated) at t=973.386s
+# blank 8 begin at t=1031.540s
+# blank 8 settle begin at t=1031.540s
+1036.440,blank,settle,8,1,1029.0200,0.75386
+1041.440,blank,settle,8,2,1028.9000,0.75377
+1046.440,blank,settle,8,3,1028.5400,0.75351
+1051.440,blank,settle,8,4,1029.1400,0.75395
+1056.440,blank,settle,8,5,1029.3800,0.75412
+# blank 8 avg begin at t=1056.440s
+1061.340,blank,avg,8,1,1028.5601,0.75352
+1066.340,blank,avg,8,2,1028.1801,0.75325
+1071.340,blank,avg,8,3,1028.3600,0.75338
+1076.340,blank,avg,8,4,1029.1801,0.75398
+1081.340,blank,avg,8,5,1029.4399,0.75417
+1086.340,blank,avg,8,6,1029.2800,0.75405
+1091.340,blank,avg,8,7,1030.1000,0.75465
+1096.340,blank,avg,8,8,1030.0000,0.75458
+1101.340,blank,avg,8,9,1029.5400,0.75424
+1106.340,blank,avg,8,10,1029.0800,0.75390
+# blank 8 final = 1029.1720 counts, 0.75397 V
+# LOD stats: n=8, mean=1029.8108, std=1.4871, CoV=0.1444%, LOD_A3sigma=0.001885
+# awaiting cuvette swap for blank 9 (press B when seated) at t=1106.341s
+# blank 9 begin at t=1154.157s
+# blank 9 settle begin at t=1154.157s
+1159.057,blank,settle,9,1,1027.7000,0.75289
+1164.057,blank,settle,9,2,1027.8600,0.75301
+1169.057,blank,settle,9,3,1027.8800,0.75303
+1174.057,blank,settle,9,4,1026.7400,0.75219
+1179.057,blank,settle,9,5,1026.9000,0.75231
+# blank 9 avg begin at t=1179.057s
+1183.957,blank,avg,9,1,1027.3000,0.75260
+1188.957,blank,avg,9,2,1027.4800,0.75273
+1193.957,blank,avg,9,3,1028.1200,0.75320
+1198.957,blank,avg,9,4,1027.3600,0.75264
+1203.957,blank,avg,9,5,1027.5800,0.75281
+1208.957,blank,avg,9,6,1027.6400,0.75285
+1213.957,blank,avg,9,7,1027.0800,0.75244
+1218.957,blank,avg,9,8,1027.9600,0.75308
+1223.957,blank,avg,9,9,1027.7600,0.75294
+1228.957,blank,avg,9,10,1028.8000,0.75370
+# blank 9 final = 1027.7080 counts, 0.75290 V
+# LOD stats: n=9, mean=1029.5771, std=1.5576, CoV=0.1513%, LOD_A3sigma=0.001976
+# awaiting cuvette swap for blank 10 (press B when seated) at t=1228.958s
+# blank 10 begin at t=1252.962s
+# blank 10 settle begin at t=1252.962s
+1257.862,blank,settle,10,1,1027.8000,0.75297
+1262.862,blank,settle,10,2,1027.4800,0.75273
+1267.862,blank,settle,10,3,1027.9399,0.75307
+1272.862,blank,settle,10,4,1027.4000,0.75267
+1277.862,blank,settle,10,5,1027.5800,0.75281
+# blank 10 avg begin at t=1277.862s
+1282.762,blank,avg,10,1,1028.1600,0.75323
+1287.762,blank,avg,10,2,1028.0000,0.75311
+1292.762,blank,avg,10,3,1027.1000,0.75245
+1297.762,blank,avg,10,4,1028.1801,0.75325
+1302.762,blank,avg,10,5,1027.1801,0.75251
+1307.762,blank,avg,10,6,1027.3400,0.75263
+1312.762,blank,avg,10,7,1027.3600,0.75264
+1317.762,blank,avg,10,8,1027.7400,0.75292
+1322.762,blank,avg,10,9,1027.6400,0.75285
+1327.762,blank,avg,10,10,1027.3600,0.75264
+# blank 10 final = 1027.6060 counts, 0.75282 V
+# LOD stats: n=10, mean=1029.3800, std=1.5954, CoV=0.1550%, LOD_A3sigma=0.002024
+# awaiting cuvette swap for blank 11 (press B when seated) at t=1327.763s
+# blank 11 begin at t=1357.683s
+# blank 11 settle begin at t=1357.683s
+1362.583,blank,settle,11,1,1022.9200,0.74939
+1367.583,blank,settle,11,2,1023.1400,0.74955
+1372.583,blank,settle,11,3,1024.0800,0.75024
+1377.583,blank,settle,11,4,1024.3600,0.75045
+1382.583,blank,settle,11,5,1023.8800,0.75010
+# blank 11 avg begin at t=1382.583s
+1387.483,blank,avg,11,1,1023.0400,0.74948
+1392.483,blank,avg,11,2,1023.9000,0.75011
+1397.483,blank,avg,11,3,1024.1200,0.75027
+1402.483,blank,avg,11,4,1024.5400,0.75058
+1407.483,blank,avg,11,5,1024.6200,0.75064
+1412.483,blank,avg,11,6,1024.3800,0.75046
+1417.483,blank,avg,11,7,1024.8199,0.75078
+1422.483,blank,avg,11,8,1026.1801,0.75178
+1427.483,blank,avg,11,9,1025.2600,0.75111
+1432.483,blank,avg,11,10,1025.1000,0.75099
+# blank 11 final = 1024.5959 counts, 0.75062 V
+# LOD stats: n=11, mean=1028.9451, std=2.0908, CoV=0.2032%, LOD_A3sigma=0.002655
+# awaiting cuvette swap for blank 12 (press B when seated) at t=1432.484s
+# blank 12 begin at t=1446.165s
+# blank 12 settle begin at t=1446.165s
+1451.065,blank,settle,12,1,1022.7400,0.74926
+1456.065,blank,settle,12,2,1023.0000,0.74945
+1461.065,blank,settle,12,3,1022.3200,0.74895
+1466.065,blank,settle,12,4,1023.4800,0.74980
+1471.065,blank,settle,12,5,1023.2600,0.74964
+# blank 12 avg begin at t=1471.065s
+1475.965,blank,avg,12,1,1023.5000,0.74982
+1480.965,blank,avg,12,2,1024.1000,0.75026
+1485.965,blank,avg,12,3,1023.6800,0.74995
+1490.965,blank,avg,12,4,1023.9200,0.75012
+1495.965,blank,avg,12,5,1024.1400,0.75029
+1500.965,blank,avg,12,6,1023.5000,0.74982
+1505.965,blank,avg,12,7,1023.6000,0.74989
+1510.965,blank,avg,12,8,1023.6800,0.74995
+1515.965,blank,avg,12,9,1023.3400,0.74970
+1520.965,blank,avg,12,10,1024.3600,0.75045
+# blank 12 final = 1023.7820 counts, 0.75002 V
+# LOD stats: n=12, mean=1028.5148, std=2.4890, CoV=0.2420%, LOD_A3sigma=0.003165
+# awaiting cuvette swap for blank 13 (press B when seated) at t=1520.966s
+# blank 13 begin at t=1545.722s
+# blank 13 settle begin at t=1545.722s
+1550.622,blank,settle,13,1,1025.5000,0.75128
+1555.622,blank,settle,13,2,1025.1600,0.75103
+1560.622,blank,settle,13,3,1025.1200,0.75100
+1565.622,blank,settle,13,4,1025.1200,0.75100
+1570.622,blank,settle,13,5,1025.1400,0.75102
+# blank 13 avg begin at t=1570.622s
+1575.522,blank,avg,13,1,1024.7400,0.75073
+1580.522,blank,avg,13,2,1025.6000,0.75136
+1585.522,blank,avg,13,3,1024.8800,0.75083
+1590.522,blank,avg,13,4,1024.7000,0.75070
+1595.522,blank,avg,13,5,1024.3400,0.75043
+1600.522,blank,avg,13,6,1025.4000,0.75121
+1605.522,blank,avg,13,7,1025.1400,0.75102
+1610.522,blank,avg,13,8,1024.5200,0.75056
+1615.522,blank,avg,13,9,1025.2000,0.75106
+1620.522,blank,avg,13,10,1025.4600,0.75125
+# blank 13 final = 1024.9980 counts, 0.75091 V
+# LOD stats: n=13, mean=1028.2443, std=2.5750, CoV=0.2504%, LOD_A3sigma=0.003275
+# awaiting cuvette swap for blank 14 (press B when seated) at t=1620.523s
+# blank 14 begin at t=1673.296s
+# blank 14 settle begin at t=1673.296s
+1678.196,blank,settle,14,1,1026.5400,0.75204
+1683.196,blank,settle,14,2,1025.6600,0.75140
+1688.196,blank,settle,14,3,1025.9399,0.75160
+1693.196,blank,settle,14,4,1025.8000,0.75150
+1698.196,blank,settle,14,5,1025.8199,0.75152
+# blank 14 avg begin at t=1698.196s
+1703.096,blank,avg,14,1,1026.0800,0.75171
+1708.096,blank,avg,14,2,1025.6600,0.75140
+1713.096,blank,avg,14,3,1026.1200,0.75174
+1718.096,blank,avg,14,4,1026.7200,0.75218
+1723.096,blank,avg,14,5,1026.4600,0.75199
+1728.096,blank,avg,14,6,1025.9000,0.75158
+1733.096,blank,avg,14,7,1025.0800,0.75097
+1738.096,blank,avg,14,8,1025.9000,0.75158
+1743.096,blank,avg,14,9,1025.6801,0.75141
+1748.096,blank,avg,14,10,1025.6000,0.75136
+# blank 14 final = 1025.9200 counts, 0.75159 V
+# LOD stats: n=14, mean=1028.0782, std=2.5507, CoV=0.2481%, LOD_A3sigma=0.003245
+# awaiting cuvette swap for blank 15 (press B when seated) at t=1748.097s
+# blank 15 begin at t=1770.871s
+# blank 15 settle begin at t=1770.871s
+1775.771,blank,settle,15,1,1028.7200,0.75364
+1780.771,blank,settle,15,2,1028.6801,0.75361
+1785.771,blank,settle,15,3,1029.1600,0.75396
+1790.771,blank,settle,15,4,1027.4600,0.75272
+1795.771,blank,settle,15,5,1028.4800,0.75347
+# blank 15 avg begin at t=1795.771s
+1800.671,blank,avg,15,1,1027.8600,0.75301
+1805.671,blank,avg,15,2,1028.4800,0.75347
+1810.671,blank,avg,15,3,1028.0601,0.75316
+1815.671,blank,avg,15,4,1028.8000,0.75370
+1820.671,blank,avg,15,5,1028.5200,0.75349
+1825.671,blank,avg,15,6,1028.0000,0.75311
+1830.671,blank,avg,15,7,1027.7400,0.75292
+1835.671,blank,avg,15,8,1028.8199,0.75371
+1840.671,blank,avg,15,9,1028.4800,0.75347
+1845.671,blank,avg,15,10,1027.7800,0.75295
+# blank 15 final = 1028.2540 counts, 0.75330 V
+# LOD stats: n=15, mean=1028.0900, std=2.4584, CoV=0.2391%, LOD_A3sigma=0.003127
+# awaiting cuvette swap for blank 16 (press B when seated) at t=1845.672s
+# blank 16 begin at t=1889.440s
+# blank 16 settle begin at t=1889.440s
+1894.340,blank,settle,16,1,1027.3800,0.75266
+1899.340,blank,settle,16,2,1027.6200,0.75284
+1904.340,blank,settle,16,3,1027.3400,0.75263
+1909.340,blank,settle,16,4,1028.0200,0.75313
+1914.340,blank,settle,16,5,1028.0000,0.75311
+# blank 16 avg begin at t=1914.340s
+1919.240,blank,avg,16,1,1027.6000,0.75282
+1924.240,blank,avg,16,2,1027.7400,0.75292
+1929.240,blank,avg,16,3,1027.5000,0.75275
+1934.240,blank,avg,16,4,1026.3800,0.75193
+1939.240,blank,avg,16,5,1027.1400,0.75248
+1944.240,blank,avg,16,6,1026.7400,0.75219
+1949.240,blank,avg,16,7,1026.5601,0.75206
+1954.240,blank,avg,16,8,1026.9000,0.75231
+1959.240,blank,avg,16,9,1026.3199,0.75188
+1964.240,blank,avg,16,10,1027.0400,0.75241
+# blank 16 final = 1026.9919 counts, 0.75238 V
+# LOD stats: n=16, mean=1028.0214, std=2.3908, CoV=0.2326%, LOD_A3sigma=0.003041
+# awaiting cuvette swap for blank 17 (press B when seated) at t=1964.241s
+# blank 17 begin at t=1989.666s
+# blank 17 settle begin at t=1989.666s
+1994.566,blank,settle,17,1,1028.4000,0.75341
+1999.566,blank,settle,17,2,1028.1000,0.75319
+2004.566,blank,settle,17,3,1028.0400,0.75314
+2009.566,blank,settle,17,4,1028.4800,0.75347
+2014.566,blank,settle,17,5,1029.2400,0.75402
+# blank 17 avg begin at t=2014.566s
+2019.466,blank,avg,17,1,1028.4600,0.75345
+2024.466,blank,avg,17,2,1029.5400,0.75424
+2029.466,blank,avg,17,3,1028.5400,0.75351
+2034.466,blank,avg,17,4,1029.5200,0.75423
+2039.466,blank,avg,17,5,1029.2800,0.75405
+2044.466,blank,avg,17,6,1029.3199,0.75408
+2049.466,blank,avg,17,7,1030.1400,0.75468
+2054.466,blank,avg,17,8,1029.5200,0.75423
+2059.466,blank,avg,17,9,1028.9399,0.75380
+2064.466,blank,avg,17,10,1028.5800,0.75354
+# blank 17 final = 1029.1840 counts, 0.75398 V
+# LOD stats: n=17, mean=1028.0897, std=2.3320, CoV=0.2268%, LOD_A3sigma=0.002965
+# awaiting cuvette swap for blank 18 (press B when seated) at t=2064.467s
+# blank 18 begin at t=2090.612s
+# blank 18 settle begin at t=2090.612s
+2095.512,blank,settle,18,1,1029.1801,0.75398
+2100.512,blank,settle,18,2,1028.0000,0.75311
+2105.512,blank,settle,18,3,1027.9200,0.75306
+2110.512,blank,settle,18,4,1028.1801,0.75325
+2115.512,blank,settle,18,5,1029.4600,0.75418
+# blank 18 avg begin at t=2115.512s
+2120.412,blank,avg,18,1,1028.3400,0.75336
+2125.412,blank,avg,18,2,1028.5601,0.75352
+2130.412,blank,avg,18,3,1027.3400,0.75263
+2135.412,blank,avg,18,4,1027.9200,0.75306
+2140.412,blank,avg,18,5,1027.3400,0.75263
+2145.412,blank,avg,18,6,1027.2400,0.75256
+2150.412,blank,avg,18,7,1027.7000,0.75289
+2155.412,blank,avg,18,8,1028.0000,0.75311
+2160.412,blank,avg,18,9,1026.8800,0.75229
+2165.412,blank,avg,18,10,1027.3800,0.75266
+# blank 18 final = 1027.6700 counts, 0.75287 V
+# LOD stats: n=18, mean=1028.0664, std=2.2646, CoV=0.2203%, LOD_A3sigma=0.002879
+# awaiting cuvette swap for blank 19 (press B when seated) at t=2165.413s
+# blank 19 begin at t=2173.690s
+# blank 19 settle begin at t=2173.690s
+2178.590,blank,settle,19,1,1026.0601,0.75169
+2183.590,blank,settle,19,2,1025.6600,0.75140
+2188.590,blank,settle,19,3,1025.2800,0.75112
+2193.590,blank,settle,19,4,1025.8400,0.75153
+2198.590,blank,settle,19,5,1025.0200,0.75093
+# blank 19 avg begin at t=2198.590s
+2203.490,blank,avg,19,1,1025.6801,0.75141
+2208.490,blank,avg,19,2,1025.3400,0.75116
+2213.490,blank,avg,19,3,1026.2600,0.75184
+2218.490,blank,avg,19,4,1026.1801,0.75178
+2223.490,blank,avg,19,5,1025.7000,0.75143
+2228.490,blank,avg,19,6,1026.7000,0.75216
+2233.490,blank,avg,19,7,1026.9800,0.75237
+2238.490,blank,avg,19,8,1026.5601,0.75206
+2243.490,blank,avg,19,9,1027.1801,0.75251
+2248.490,blank,avg,19,10,1026.5601,0.75206
+# blank 19 final = 1026.3140 counts, 0.75188 V
+# LOD stats: n=19, mean=1027.9742, std=2.2372, CoV=0.2176%, LOD_A3sigma=0.002845
+# awaiting cuvette swap for blank 20 (press B when seated) at t=2248.491s
+# blank 20 begin at t=2264.841s
+# blank 20 settle begin at t=2264.841s
+2269.741,blank,settle,20,1,1025.8400,0.75153
+2274.741,blank,settle,20,2,1026.6400,0.75212
+2279.741,blank,settle,20,3,1025.8600,0.75155
+2284.741,blank,settle,20,4,1026.1200,0.75174
+2289.741,blank,settle,20,5,1026.8800,0.75229
+# blank 20 avg begin at t=2289.741s
+2294.641,blank,avg,20,1,1025.9600,0.75162
+2299.641,blank,avg,20,2,1026.0601,0.75169
+2304.641,blank,avg,20,3,1025.7600,0.75147
+2309.641,blank,avg,20,4,1026.8600,0.75228
+2314.641,blank,avg,20,5,1027.2800,0.75259
+2319.641,blank,avg,20,6,1027.2200,0.75254
+2324.641,blank,avg,20,7,1027.6801,0.75288
+2329.641,blank,avg,20,8,1027.5400,0.75278
+2334.641,blank,avg,20,9,1026.8800,0.75229
+2339.641,blank,avg,20,10,1028.0800,0.75317
+# blank 20 final = 1026.9320 counts, 0.75233 V
+# LOD stats: n=20, mean=1027.9221, std=2.1899, CoV=0.2130%, LOD_A3sigma=0.002785
+# reached MAX_BLANKS=20; stopping
+

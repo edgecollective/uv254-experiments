@@ -1,0 +1,371 @@
+// Absorbance measurement firmware, ItsyBitsy nRF52840, "settle" variant.
+//
+// LED is driven by an external 555 (soldered on) - the micro does NOT drive
+// the LED pin. Each measurement (BLANK / SAMPLE) has two explicit subphases:
+//   SETTLE:  5 x 5 s rounds (25 s) - values are streamed but discarded
+//   AVG:    10 x 5 s rounds (50 s) - all 10 averaged for the final value
+// Total 75 s per measurement.
+//
+// Buttons:
+//   B (pin 9) -> CALIBRATE  (measure I_blank)
+//   A (pin 7) -> COMPUTE    (measure I_sample, then A = log10(I_blank / I_sample))
+//
+// OLED shows a countdown during SETTLE and a count-up (round X / 10 with a
+// running mean) during AVG.
+//
+// Serial output during a measurement:
+//   # BLANK begin at t=NN.NNNs
+//   <t_s>,blank,settle,1,<adc>,<volts>
+//   ...  (5 settle rows)
+//   # BLANK settle -> avg at t=NN.NNNs
+//   <t_s>,blank,avg,1,<adc>,<volts>
+//   ...  (10 avg rows)
+//   # BLANK final = <adc> counts, <volts> V  (mean of 10 avg rounds)
+
+#include <Arduino.h>
+#include <Adafruit_TinyUSB.h>
+#include <Wire.h>
+#include <Adafruit_GFX.h>
+#include <Adafruit_SSD1306.h>
+
+#define BTN_CAL_PIN   9   // Button B -> CALIBRATE (blank)
+#define BTN_MEAS_PIN  7   // Button A -> COMPUTE   (sample -> absorbance)
+#define DETECT_PIN    A5
+
+const uint32_t SUBSAMPLE_INTERVAL_MS = 100;  // 10 Hz
+const uint16_t SAMPLES_PER_ROUND     = 50;   // 5 s per round
+const uint8_t  SETTLE_ROUNDS         = 5;    // 25 s settle
+const uint8_t  AVG_ROUNDS            = 10;   // 50 s avg window
+const uint32_t ROUND_MS              = (uint32_t)SAMPLES_PER_ROUND * SUBSAMPLE_INTERVAL_MS;
+const uint32_t SETTLE_MS             = (uint32_t)SETTLE_ROUNDS * ROUND_MS;
+
+// nRF52840 SAADC, 12-bit native (0..4095). Default analogReference is
+// AR_INTERNAL_3_0 -> 3.0 V full scale (M0 variant is 12-bit @ 3.3 V, so
+// raw counts here read ~9 % lower for the same input voltage).
+const float V_REF          = 3.0f;
+const float ADC_FULL_SCALE = 4095.0f;
+static inline float counts_to_volts(float c) { return c * V_REF / ADC_FULL_SCALE; }
+
+#define OLED_W     128
+#define OLED_H     64
+#define OLED_ADDR  0x3C
+Adafruit_SSD1306 display(OLED_W, OLED_H, &Wire, -1);
+bool display_ok = false;
+
+enum State    { STATE_READY, STATE_MEASURING };
+enum Phase    { PHASE_NONE, PHASE_BLANK, PHASE_SAMPLE };
+enum Subphase { SUB_NONE, SUB_SETTLE, SUB_AVG };
+
+State    state    = STATE_READY;
+Phase    phase    = PHASE_NONE;
+Subphase subphase = SUB_NONE;
+
+uint8_t  round_index_in_sub = 0;   // 0..(N-1) within the current subphase
+uint16_t sample_index       = 0;   // 0..SAMPLES_PER_ROUND-1
+double   sample_sum         = 0.0;
+uint32_t next_subsample_ms  = 0;
+uint32_t phase_start_ms     = 0;
+uint32_t subphase_start_ms  = 0;
+
+float    avg_rounds[10] = {0};     // holds the AVG_ROUNDS values for final mean
+
+float    i_blank    = 0.0f;
+float    i_sample   = 0.0f;
+float    absorbance = 0.0f;
+bool     have_calibration = false;
+bool     have_sample      = false;
+
+uint32_t boot_ms = 0;
+
+struct Button {
+  uint8_t pin;
+  int     last_stable;
+  uint32_t last_change;
+};
+Button btn_cal  = {BTN_CAL_PIN,  HIGH, 0};
+Button btn_meas = {BTN_MEAS_PIN, HIGH, 0};
+const uint32_t BTN_DEBOUNCE_MS = 30;
+
+static const char* phase_name(Phase p) {
+  switch (p) {
+    case PHASE_BLANK:  return "blank";
+    case PHASE_SAMPLE: return "sample";
+    default:           return "-";
+  }
+}
+
+static const char* subphase_name(Subphase s) {
+  switch (s) {
+    case SUB_SETTLE: return "settle";
+    case SUB_AVG:    return "avg";
+    default:         return "-";
+  }
+}
+
+static float running_avg_mean() {
+  if (round_index_in_sub == 0) return 0.0f;
+  double sum = 0.0;
+  for (uint8_t i = 0; i < round_index_in_sub; i++) sum += avg_rounds[i];
+  return (float)(sum / round_index_in_sub);
+}
+
+static void render() {
+  if (!display_ok) return;
+  display.clearDisplay();
+  display.setTextSize(1);
+  display.setCursor(0, 0);
+
+  if (state == STATE_READY) {
+    display.println("Ready (nRF52 settle)");
+    display.setCursor(0, 8);
+    display.println(have_calibration ? "B:Cal  A:Compute"
+                                     : "B: Calibrate");
+  } else {
+    display.print("Measuring ");
+    display.println(phase_name(phase));
+
+    display.setCursor(0, 10);
+    if (subphase == SUB_SETTLE) {
+      uint32_t elapsed = millis() - subphase_start_ms;
+      uint32_t remain_s = (elapsed >= SETTLE_MS)
+                           ? 0
+                           : (SETTLE_MS - elapsed + 999) / 1000;
+      display.print("SETTLING ");
+      display.print(remain_s);
+      display.println("s left");
+    } else if (subphase == SUB_AVG) {
+      display.print("AVERAGING ");
+      display.print(round_index_in_sub);   // completed so far
+      display.print('/');
+      display.println(AVG_ROUNDS);
+
+      display.setCursor(0, 20);
+      display.print("mean= ");
+      if (round_index_in_sub > 0) {
+        float m = running_avg_mean();
+        display.print(m, 1);
+        display.print(' ');
+        display.print(counts_to_volts(m), 4);
+        display.print('V');
+      }
+    }
+  }
+
+  display.setCursor(0, 32);
+  display.print("Blk= ");
+  if (have_calibration) {
+    display.print((uint32_t)(i_blank + 0.5f));
+    display.print(' ');
+    display.print(counts_to_volts(i_blank), 3);
+    display.print('V');
+  }
+
+  display.setCursor(0, 42);
+  display.print("Smp= ");
+  if (have_sample) {
+    display.print((uint32_t)(i_sample + 0.5f));
+    display.print(' ');
+    display.print(counts_to_volts(i_sample), 3);
+    display.print('V');
+  }
+
+  display.setCursor(0, 54);
+  display.print("Abs= ");
+  if (have_sample && have_calibration) display.print(absorbance, 4);
+
+  display.display();
+}
+
+static void enter_subphase(Subphase s) {
+  subphase = s;
+  round_index_in_sub = 0;
+  sample_index = 0;
+  sample_sum = 0.0;
+  subphase_start_ms = millis();
+  next_subsample_ms = millis();
+  if (s == SUB_AVG) {
+    for (uint8_t i = 0; i < AVG_ROUNDS; i++) avg_rounds[i] = 0.0f;
+  }
+  Serial.print("# ");
+  Serial.print(phase_name(phase));
+  Serial.print(' ');
+  Serial.print(subphase_name(s));
+  Serial.print(" begin at t=");
+  Serial.print((subphase_start_ms - boot_ms) / 1000.0f, 3);
+  Serial.println("s");
+  Serial.flush();
+  render();
+}
+
+static void start_measurement(Phase p) {
+  phase = p;
+  state = STATE_MEASURING;
+  phase_start_ms = millis();
+
+  if (p == PHASE_BLANK) {
+    have_calibration = false;
+    have_sample = false;
+  }
+
+  Serial.print("# ");
+  Serial.print(phase_name(p));
+  Serial.print(" begin at t=");
+  Serial.print((phase_start_ms - boot_ms) / 1000.0f, 3);
+  Serial.println("s");
+  Serial.flush();
+
+  enter_subphase(SUB_SETTLE);
+}
+
+static void on_calibrate_press() {
+  if (state != STATE_READY) return;
+  start_measurement(PHASE_BLANK);
+}
+
+static void on_compute_press() {
+  if (state != STATE_READY) return;
+  if (!have_calibration) return;
+  start_measurement(PHASE_SAMPLE);
+}
+
+static void finish_measurement() {
+  double sum = 0.0;
+  for (uint8_t i = 0; i < AVG_ROUNDS; i++) sum += avg_rounds[i];
+  float final_val = (float)(sum / AVG_ROUNDS);
+
+  if (phase == PHASE_BLANK) {
+    i_blank = final_val;
+    have_calibration = true;
+  } else if (phase == PHASE_SAMPLE) {
+    i_sample = final_val;
+    have_sample = true;
+    absorbance = (i_sample > 0.0f && i_blank > 0.0f)
+                   ? log10f(i_blank / i_sample)
+                   : 0.0f;
+  }
+
+  Serial.print("# ");
+  Serial.print(phase_name(phase));
+  Serial.print(" final = ");
+  Serial.print(final_val, 4);
+  Serial.print(" counts, ");
+  Serial.print(counts_to_volts(final_val), 5);
+  Serial.print(" V (mean of ");
+  Serial.print(AVG_ROUNDS);
+  Serial.println(" avg rounds)");
+
+  if (phase == PHASE_SAMPLE) {
+    Serial.print("# absorbance = log10(");
+    Serial.print(i_blank, 4);
+    Serial.print(" / ");
+    Serial.print(i_sample, 4);
+    Serial.print(") = ");
+    Serial.println(absorbance, 6);
+  }
+  Serial.flush();
+
+  phase = PHASE_NONE;
+  subphase = SUB_NONE;
+  state = STATE_READY;
+  render();
+}
+
+static void tick_sampling() {
+  if (state != STATE_MEASURING) return;
+  if ((int32_t)(millis() - next_subsample_ms) < 0) return;
+
+  float v = (float)analogRead(DETECT_PIN);
+  sample_sum += (double)v;
+  sample_index++;
+  next_subsample_ms += SUBSAMPLE_INTERVAL_MS;
+
+  if (sample_index >= SAMPLES_PER_ROUND) {
+    float avg = (float)(sample_sum / SAMPLES_PER_ROUND);
+    uint32_t now = millis();
+    float t_s = (now - boot_ms) / 1000.0f;
+    uint8_t rnum = round_index_in_sub + 1;
+
+    Serial.print(t_s, 3);
+    Serial.print(',');
+    Serial.print(phase_name(phase));
+    Serial.print(',');
+    Serial.print(subphase_name(subphase));
+    Serial.print(',');
+    Serial.print(rnum);
+    Serial.print(',');
+    Serial.print(avg, 4);
+    Serial.print(',');
+    Serial.println(counts_to_volts(avg), 5);
+    Serial.flush();
+
+    if (subphase == SUB_AVG && round_index_in_sub < AVG_ROUNDS) {
+      avg_rounds[round_index_in_sub] = avg;
+    }
+    round_index_in_sub++;
+    sample_index = 0;
+    sample_sum = 0.0;
+
+    uint8_t rounds_in_this_sub = (subphase == SUB_SETTLE) ? SETTLE_ROUNDS : AVG_ROUNDS;
+    if (round_index_in_sub >= rounds_in_this_sub) {
+      if (subphase == SUB_SETTLE) {
+        enter_subphase(SUB_AVG);
+        return;
+      } else {
+        finish_measurement();
+        return;
+      }
+    }
+  }
+
+  render();
+}
+
+static void check_button(Button& b, void (*handler)()) {
+  int now = digitalRead(b.pin);
+  uint32_t t = millis();
+  if (now != b.last_stable && (t - b.last_change) > BTN_DEBOUNCE_MS) {
+    b.last_stable = now;
+    b.last_change = t;
+    if (now == LOW) handler();
+  }
+}
+
+void setup() {
+  pinMode(LED_BUILTIN, OUTPUT);
+  pinMode(BTN_CAL_PIN,  INPUT_PULLUP);
+  pinMode(BTN_MEAS_PIN, INPUT_PULLUP);
+
+  analogReadResolution(12);   // 0..4095, native SAADC resolution
+
+  if (!TinyUSBDevice.isInitialized()) {
+    TinyUSBDevice.begin(0);
+  }
+  Serial.begin(115200);
+  uint32_t t0 = millis();
+  while (!Serial && (millis() - t0) < 2000) { delay(10); }
+
+  Wire.begin();
+  display_ok = display.begin(SSD1306_SWITCHCAPVCC, OLED_ADDR);
+  if (display_ok) {
+    display.setRotation(0);
+    display.setTextColor(SSD1306_WHITE);
+  }
+
+  boot_ms = millis();
+
+  Serial.println("# absorbance-itsy (nRF52840) settle variant ready");
+  Serial.println("# LED driven by external 555; micro does not drive LED");
+  Serial.println("# 5 settle rounds + 10 avg rounds x 5 s = 75 s per measurement");
+  Serial.println("# final = mean of 10 avg rounds");
+  Serial.println("# CSV cols = t_s,phase,subphase,round,adc,volts");
+  Serial.println("# B=CALIBRATE (blank), A=COMPUTE (sample -> absorbance)");
+  Serial.flush();
+
+  render();
+}
+
+void loop() {
+  check_button(btn_cal,  on_calibrate_press);
+  check_button(btn_meas, on_compute_press);
+  tick_sampling();
+}
