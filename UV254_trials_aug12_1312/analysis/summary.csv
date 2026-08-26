@@ -1,0 +1,4 @@
+block,firmware,n,slope_raw,slope_corr,mae_raw_mAU,mae_corr_mAU,max_corr_mAU,mean_signed_corr_mAU,all_positive_corr,firmware_m,firmware_b_mAU
+A_fluor_only,v7.0,8,0.792,0.962,6.83,2.01,3.70,+1.91,False,1.2152,-1.26
+B_head_to_head,v6.1,11,0.877,0.998,4.15,3.31,5.90,+3.31,True,,
+B_head_to_head,v7.0,13,0.789,1.013,3.24,4.35,8.80,+3.75,False,1.2846,-6.87
